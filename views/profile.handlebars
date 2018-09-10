@@ -1,0 +1,62 @@
+<!doctype html>
+<head>
+    <meta content="text/html; charset=utf-8">
+    <script src="javascripts/dhtmlxscheduler.js" ></script>
+    <link rel="stylesheet" href="stylesheets/dhtmlxscheduler.css">
+    <style type="text/css" media="screen">
+        html, body{
+            margin:0px;
+            padding:0px;
+            height:100%;
+            overflow:hidden;
+        }   
+    </style>
+<script type="text/javascript" charset="utf-8">
+    function init() {
+        scheduler.init('scheduler_here',new Date(2018,8,4),"month");
+        scheduler.init('scheduler_here', new Date(2018, 8, 4), "month");
+        scheduler.templates.xml_date = function (value) { return new Date(value); };
+        scheduler.load("/profile/data", "json");
+
+        scheduler.config.xml_date = "%Y-%m-%d %H:%i";
+
+        var dp = new dataProcessor("/profile/data");
+        dp.init(scheduler);
+        dp.setTransactionMode("POST", false);
+    }
+</script>
+<style>
+    .customized_btn {
+            background-color: rgb(100, 204, 230);
+            border: none;
+            border-radius: 5px;
+            color: rgb(114, 109, 109);
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 12px;
+            margin-top: 2px;
+            width: 15%;
+            float: right;
+            word-wrap: break-word;
+        }
+</style>
+</head>
+<body onload="init();">
+    <a href="/logout" class="customized_btn">Logout</a>
+    <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
+        <div class="dhx_cal_navline">
+            <div class="dhx_cal_prev_button">&nbsp;</div>
+            <div class="dhx_cal_next_button">&nbsp;</div>
+            <div class="dhx_cal_today_button"></div>
+            <div class="dhx_cal_date"></div>
+            <div class="dhx_cal_tab" name="day_tab"></div>
+            <div class="dhx_cal_tab" name="week_tab"></div>
+            <div class="dhx_cal_tab" name="month_tab"></div>
+        </div>
+        <div class="dhx_cal_header">
+        </div>
+        <div class="dhx_cal_data">
+        </div>
+    </div>
+</body>
